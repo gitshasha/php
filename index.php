@@ -302,7 +302,7 @@ echo "</div>";
       <div class="col-md-6 mt-md-0 mt-3">
 
         <!-- Content -->
-        <h5 class="text-uppercase">Price Comparison Tool</h5>
+        <h5 class="text-uppercase">Price4you</h5>
         <p>Here you can compare prices of a product on various e-commerce platforms.</p>
 
       </div>
@@ -357,7 +357,7 @@ echo "</div>";
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2022 Copyright:
-    <a href="">Comprice</a>
+    <a href="">Price4you</a>
   </div>
   <!-- Copyright -->
 
