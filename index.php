@@ -1,5 +1,6 @@
  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
   <!-- Font Awesome -->
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
@@ -12,6 +13,7 @@
 	  margin:15px;
 	  border-radius:15px;
   }
+
   img
   {
 	  height:180px;
@@ -38,7 +40,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark btn-dark">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="#">Ecommerce Price Comparison website Using Web Scrapping</a>
+  <a class="navbar-brand" href="#">Price4you</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -91,8 +93,8 @@
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1>Ecommerce Price Comparison website Using Web Scrapping</h1>      
-    <p>Price Comparison Tool : Here you can compare prices of a product on various e-commerce platforms..</p>
+    <h1>Compare like never before</h1>      
+    <p>Price4you: Here you can compare prices of a product on various e-commerce platforms..</p>
   </div>
 </div>
 
@@ -163,30 +165,37 @@ $html = file_get_html($flp_query);
 // echo	$html->find('div[class="_4rR01T"]',0)->plaintext;
 // }
 
-echo "<span class='names'>";
- foreach($html->find('div[class="_4rR01T"]') as $div)
+echo "<div class='items'>";
+
+ foreach($html->find('div[class="_2kHMtA"]') as $div)
        {
-           echo "<p>" . $div->plaintext . "</p>";
+        echo "<div class='box'>";
+         foreach($div->find('div[class="CXW8mj"]')as $bro){
+            echo $bro;
+           }
+            foreach($div->find('div[class="_4rR01T"]')as $cro){
+            echo $cro;
+           }
+           foreach($div->find('div[class="_30jeq3 _1_WHN1"]' )as $fro){
+echo $fro;
+           }
+           echo "<ul>";
+           foreach($div->find('ul[class="_1xgFaf"]' )as $fro){
+foreach($fro->find('li[class="rgWa7D"]')as $tro){
+  echo $tro;
+}
+echo "</ul>";
+echo"</div>";
+           }
+          
        }
-echo "</span><br><br>";
 
-echo "<span class='float-right'>";
-
-// if(isset($html->find('div[class="_3tbKJL"]',0)->plaintext)){
-// echo	$html->find('div[class="_3tbKJL"]',0)->plaintext;
-// }
- foreach($html->find('div[class="_3tbKJL"]') as $div)
-       {
-           echo "<p>" . $div->plaintext . "</p>";
-       }
-echo "</span><br><br>";
-
-
+echo "</div>";
 ?>
 
 			</p>
             <hr>
-            <button type="button" class="btn btn-primary"><a href="https://www.flipkart.com" id="visitsite">Visit Flipkart</a></button>
+            <!-- <button type="button" class="btn btn-primary"><a href="https://www.flipkart.com" id="visitsite">Visit Flipkart</a></button> -->
           </div>
           <!--Card content-->
 
@@ -225,40 +234,37 @@ $amz_query=$amz_str1.$searchtext.$amz_str2;
 
 
 
-$html = file_get_contents($amz_query);
+$html = file_get_html($amz_query);
 
 #1
 
- 
+ echo "<div class='amaitems'>";
 foreach($html->find('div[class="s-card-container s-overflow-hidden aok-relative puis-include-content-margin s-latency-cf-section s-card-border"]') as $div)
        {
-           echo "<p>" . $div. "</p>";
+       echo "<div class='amabox'>";
+        
+        foreach($div->find('div[class="a-section aok-relative s-image-fixed-height"]' )as $fro){
+echo $fro;
+           }
+        foreach($div->find('div[class="a-section a-spacing-none puis-padding-right-small s-title-instructions-style"]' )as $fro){
+echo $fro;
+           }
+            foreach($div->find('span[class="a-price"]' )as $fro){
+foreach($fro->find('span[class="a-offscreen"]')as$gro){
+  echo $gro;
+}
+           }
+            echo "</div>";
        }
+echo "</div>";
+// foreach($html->find('span[class="a-size-medium a-color-base a-text-normal"]') as $span)
+//        {
+//            echo "<p>" . $span->plaintext. "</p>";
+//        }
 
-foreach($html->find('span[class="a-size-medium a-color-base a-text-normal"]') as $span)
-       {
-           echo "<p>" . $span->plaintext. "</p>";
-       }
-echo "<span class='float-right'>";
-
-// if(isset($html->find('span[class="a-price-whole"]',0)->plaintext)){
-// 	echo $html->find('span[class="a-price-whole"]',0)->plaintext;
-// }
-foreach($html->find('span[class="a-price-whole') as $span)
-       {
-           echo "<p>" . $span->plaintext . "</p>";
-       }
-echo "</span><br><br>";
 
 
 ?>
-			
-			
-			
-			
-			
-			
-			
 			
 			</p>
             <hr>
@@ -351,7 +357,7 @@ echo "</span><br><br>";
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2022 Copyright:
-    <a href=""> Created Projectworlds</a>
+    <a href="">Comprice</a>
   </div>
   <!-- Copyright -->
 
