@@ -1,12 +1,10 @@
  <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <!-- Material Design Bootstrap -->
-  <link rel="stylesheet" href="css/mdb.min.css">
-  <!-- Your custom styles (optional) -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   <style>
   .card
   {
@@ -23,6 +21,7 @@
 	  font-weight:bolder;
 	  font-size: large;
   }
+  
   #visitsite
   {
 	  text-decoration:none;
@@ -33,12 +32,13 @@
 	  font-weight:bolder;
 	  font-size: large;
   }
+  .result{display: flex;}
 </style>  
   <!--Navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark btn-dark">
 
   <!-- Navbar brand -->
-  <a class="navbar-brand" href="#">PriceComparison</a>
+  <a class="navbar-brand" href="#">Ecommerce Price Comparison website Using Web Scrapping</a>
 
   <!-- Collapse button -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -51,7 +51,7 @@
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <!--li class="nav-item active">
         <a class="nav-link" href="#">Home
           <span class="sr-only">(current)</span>
         </a>
@@ -64,7 +64,7 @@
       </li>
 
       <!-- Dropdown -->
-      <li class="nav-item dropdown">
+      <!--li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">Dropdown</a>
         <div class="dropdown-menu dropdown-dark" aria-labelledby="navbarDropdownMenuLink">
@@ -72,7 +72,7 @@
           <a class="dropdown-item" href="#">Another action</a>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
-      </li>
+      </li-->
 
     </ul>
     <!-- Links -->
@@ -87,6 +87,15 @@
 
 </nav>
 <!--/.Navbar-->
+<br><br>
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Ecommerce Price Comparison website Using Web Scrapping</h1>      
+    <p>Price Comparison Tool : Here you can compare prices of a product on various e-commerce platforms..</p>
+  </div>
+</div>
+
 <br><br>
 <form class="form-inline d-flex justify-content-center md-form form-sm mt-0" action="index.php" method="POST">
   <i class="fas fa-search" aria-hidden="true"></i>
@@ -108,7 +117,7 @@
       <div class="card-group">
 
         <!--Card-->
-        <div class="card card-personal mb-4">
+        <div class="card card-personal mb-6">
 
           <!--Card image-->
           <div class="view">
@@ -142,30 +151,39 @@ $searchtext = $_POST["searchtext"];
 }
 $searchtext = str_replace(' ', '%20', $searchtext);
 $flp_str1="https://www.flipkart.com/search?q=";
-$flp_str2="&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off&as-pos=1&as-type=HISTORY";
+$flp_str2="&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off";
 $flp_query=$flp_str1.$searchtext.$flp_str2;
 
 $html = file_get_html($flp_query);
 
-echo $html->find('div[class="_3wU53n"]',0)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('div[class="_1vC4OE _2rQ-NK"]',0)->plaintext;
+
+#1
+// if(isset($html->find('div[class="_4rR01T"]')->plaintext)){
+	
+// echo	$html->find('div[class="_4rR01T"]',0)->plaintext;
+// }
+
+echo "<span class='names'>";
+ foreach($html->find('div[class="_4rR01T"]') as $div)
+       {
+           echo "<p>" . $div->plaintext . "</p>";
+       }
 echo "</span><br><br>";
 
-echo $html->find('div[class="_3wU53n"]',1)->plaintext;
 echo "<span class='float-right'>";
-echo $html->find('div[class="_1vC4OE _2rQ-NK"]',1)->plaintext;
+
+// if(isset($html->find('div[class="_3tbKJL"]',0)->plaintext)){
+// echo	$html->find('div[class="_3tbKJL"]',0)->plaintext;
+// }
+ foreach($html->find('div[class="_3tbKJL"]') as $div)
+       {
+           echo "<p>" . $div->plaintext . "</p>";
+       }
 echo "</span><br><br>";
 
-echo $html->find('div[class="_3wU53n"]',2)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('div[class="_1vC4OE _2rQ-NK"]',2)->plaintext;
-echo "</span><br><br>";
+
 ?>
-			
-			
-			
-			
+
 			</p>
             <hr>
             <button type="button" class="btn btn-primary"><a href="https://www.flipkart.com" id="visitsite">Visit Flipkart</a></button>
@@ -176,7 +194,7 @@ echo "</span><br><br>";
         <!--Card-->
 
         <!--Card-->
-        <div class="card card-personal mb-4">
+        <div class="card card-personal mb-6">
 
           <!--Card image-->
           <div class="view">
@@ -207,22 +225,31 @@ $amz_query=$amz_str1.$searchtext.$amz_str2;
 
 
 
-$html = file_get_html($amz_query);
-echo $html->find('span[class="a-size-medium a-color-base a-text-normal"]',0)->plaintext;
+$html = file_get_contents($amz_query);
 
+#1
+
+ 
+foreach($html->find('div[class="s-card-container s-overflow-hidden aok-relative puis-include-content-margin s-latency-cf-section s-card-border"]') as $div)
+       {
+           echo "<p>" . $div. "</p>";
+       }
+
+foreach($html->find('span[class="a-size-medium a-color-base a-text-normal"]') as $span)
+       {
+           echo "<p>" . $span->plaintext. "</p>";
+       }
 echo "<span class='float-right'>";
-echo $html->find('span[class="a-price-whole"]',0)->plaintext;
+
+// if(isset($html->find('span[class="a-price-whole"]',0)->plaintext)){
+// 	echo $html->find('span[class="a-price-whole"]',0)->plaintext;
+// }
+foreach($html->find('span[class="a-price-whole') as $span)
+       {
+           echo "<p>" . $span->plaintext . "</p>";
+       }
 echo "</span><br><br>";
 
-echo $html->find('span[class="a-size-medium a-color-base a-text-normal"]',1)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('span[class="a-price-whole"]',1)->plaintext;
-echo "</span><br><br>";
-
-echo $html->find('span[class="a-size-medium a-color-base a-text-normal"]',2)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('span[class="a-price-whole"]',2)->plaintext;
-echo "</span><br><br>";
 
 ?>
 			
@@ -242,73 +269,6 @@ echo "</span><br><br>";
         </div>
         <!--Card-->
 
-        <!--Card-->
-        <div class="card card-personal mb-4">
-
-          <!--Card image-->
-          <div class="view">
-            <img class="card-img-top" src="snp.png" alt="Card image cap">
-            <a href="#!">
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <!--Card image-->
-
-          <!--Card content-->
-          <div class="card-body">
-           
-            <a>
-              <h4 class="card-title">snapdeal.com</h4>
-            </a>
-            <a class="card-meta">Search Result</a>
-
-           
-            <p class="card-text">
-			
-			
-			<?php
-$snap_str1="https://www.snapdeal.com/search?keyword=";
-$snap_str2="&santizedKeyword=samsung&catId=0&categoryId=0&suggested=true&vertical=p&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy";
-$snap_query=$snap_str1.$searchtext.$snap_str2;
-
-$html = file_get_html($snap_query);
-echo $html->find('p[class="product-title"]',0)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('span[class="lfloat product-price"]',0)->plaintext;
-echo "</span><br><br>";
-
-echo $html->find('p[class="product-title"]',1)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('span[class="lfloat product-price"]',1)->plaintext;
-echo "</span><br><br>";
-
-echo $html->find('p[class="product-title"]',2)->plaintext;
-echo "<span class='float-right'>";
-echo $html->find('span[class="lfloat product-price"]',2)->plaintext;
-echo "</span><br><br>";
-
-?>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			</p>
-			
-			
-			
-            <hr>
-           <button type="button" class="btn btn-danger"><a href="https://www.snapdeal.com" id="visitsite">Visit Snapdeal</a></button>
-          </div>
-          <!--Card content-->
-
-        </div>
-        <!--Card-->
 
       </div>
       <!--Card group-->
@@ -357,9 +317,6 @@ echo "</span><br><br>";
           <li>
             <a href="#!">Flipkart</a>
           </li>
-          <li>
-            <a href="#!">Snapdeal</a>
-          </li>
          
         </ul>
 
@@ -379,9 +336,7 @@ echo "</span><br><br>";
           <li>
             <a href="#!">flipkart.com</a>
           </li>
-          <li>
-            <a href="#!">snapdeal.com</a>
-          </li>
+        
           
         </ul>
 
@@ -395,31 +350,13 @@ echo "</span><br><br>";
   <!-- Footer Links -->
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href=""> Created by Amol Dalwai</a>
+  <div class="footer-copyright text-center py-3">© 2022 Copyright:
+    <a href=""> Created Projectworlds</a>
   </div>
   <!-- Copyright -->
 
 </footer>
 <!-- Footer -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
