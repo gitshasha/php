@@ -1,0 +1,39 @@
+.items,
+.amaitems {
+  height: 100%;
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.itemname {
+  height: 7vh;
+  width: 20vw;
+}
+.price {
+  height: 7vh;
+  width: 20vw;
+  text-align: center;
+  padding: auto;
+}
+.card-body {
+  background-color: #b4efef;
+  overflow-y: scroll;
+}
+.card-body::-webkit-scrollbar {
+  display: none;
+}
+.float-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+  font-size: 0.8em;
+}
+li {
+  list-style: none;
+}
+
+.amabox {
+  margin: 5vh;
+}
